@@ -5,8 +5,10 @@ import matches from "./modules/matches";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  
   modules: {
-    matches,
+    matches: {
+      namespaced: true,
+      ...matches,
+    }
   },
 });

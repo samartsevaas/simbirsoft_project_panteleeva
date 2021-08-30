@@ -62,9 +62,7 @@
 
 <script>
 import axios from "axios";
-import Vue from "vue";
-import Vuex from "vuex";
-Vue.use(Vuex);
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -92,40 +90,6 @@ export default {
     mini() {
       return ["xs", "sm"].includes(this.$vuetify.breakpoint.name);
     },
-    newArrayGames() {
-      let newArrayUniq = this.game.reduce(function (acc, current) {
-        return {
-          ...acc,
-          [current.competition.name]: {
-            ...current,
-            matchesOnLigue: [].concat(
-              (acc[current.competition.name] || {}).matchesOnLigue || [],
-              {
-                awayTeam: current.awayTeam,
-                homeTeam: current.homeTeam,
-                score: current.score,
-                status: current.status,
-                utcDate: current.utcDate,
-              }
-            ),
-          },
-        };
-      }, {});
-      return newArrayUniq;
-    },
-  },
-  methods: {
-    getMatches: function () {
-      axios({
-        type: "get",
-        url: `http://api.football-data.org/v2/matches?dateFrom=${this.picker}&dateTo=${this.picker}`,
-        headers: {
-          "X-Auth-Token": "b640fe61f8064cc3b5e928f58d652c8f",
-        },
-      }).then((response) => {
-        this.game = response.data.matches;
-      });
-    },
   },
   mounted() {
     axios({
@@ -136,11 +100,24 @@ export default {
       },
     }).then((response) => (this.dataFromServer = response.data.competitions));
 
-    this.getMatches();
+    // this.getMatches();
+  },
+  methods: {
+    ...mapActions({
+      getMatches: "matches/getMatches",
+    }),
+    ...mapMutations({
+      setPicker: "matches/setPicker",
+    }),
   },
   watch: {
-    picker() {
-      this.getMatches();
+    picker: {
+      immediate: true,
+      handler() {
+        this.setPicker(this.picker);
+        this.getMatches();
+      },
+      // this.getMatches();
     },
   },
 };

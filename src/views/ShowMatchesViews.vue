@@ -11,6 +11,7 @@
 
 <script>
 import showmatches from "../components/showmatches";
+import { mapGetters } from "vuex";
 export default {
   name: "ShowMatchesViews",
   components: {
@@ -20,6 +21,7 @@ export default {
     link() {
       return "/main";
     },
+    ...mapGetters('matches', ['newArrayGames']),
   },
 };
 </script>
