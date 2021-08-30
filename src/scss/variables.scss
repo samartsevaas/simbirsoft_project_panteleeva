@@ -1,0 +1,75 @@
+$header-size: (
+  'large': 8px
+);
+
+.test{
+  display: flex;
+  padding-top: 64px;
+}
+
+.test2{
+  background-color: antiquewhite;
+  justify-content: center;
+  border: grey solid 1px;
+  margin-bottom: 2px;
+}
+
+.aside {
+  top: 64px !important;
+}
+
+.header {
+  left: 0 !important;
+}
+
+.center{
+  justify-content: center;
+}
+
+.v-input__control{
+  margin-top: 22px
+}
+
+.header_event{
+  display: flex;
+  align-items: center;
+}
+
+.header_event-info{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header_event-countryLogo{
+  padding-top: 7px;
+  padding-right: 4px;
+}
+
+.v-application a{
+  color: black !important;
+  &::hover{
+    text-decoration: underline;
+  }
+}
+
+.matches{
+  justify-content: space-between;
+}
+
+.main-info_score span{
+  padding: 10px;
+}
+.main-info_score_markUp{
+  display: flex;
+  flex-direction: inherit;
+  
+}
+.header_event-expand{
+  display: flex;
+    width: 100%;
+}
+.main-info_score_intoMark{
+  display: flex;
+  flex-direction: inherit;
+}

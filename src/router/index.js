@@ -1,23 +1,33 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import competitionsListViews from "../views/CompetitionsListViews";
+import teamsListViews from "../views/TeamsListViews";
+import liguesListViews from "../views/LiguesListViews";
+import ShowMatchesViews from "../views/ShowMatchesViews";
 
 Vue.use(VueRouter);
 
+
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: "/competitions",
+    name: "Competitions",
+    component: competitionsListViews,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/teams",
+    name: "Teams",
+    component: teamsListViews,
+  },
+  {
+    path: "/ligues",
+    name: "Ligues",
+    component: liguesListViews,
+  },
+  {
+    path: "/main",
+    name: "MatchOfTheDay",
+    component: ShowMatchesViews,
   },
 ];
 
