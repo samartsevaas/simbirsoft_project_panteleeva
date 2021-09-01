@@ -7,7 +7,6 @@ import ShowMatchesViews from "../views/ShowMatchesViews";
 
 Vue.use(VueRouter);
 
-
 const routes = [
   {
     path: "/competitions",

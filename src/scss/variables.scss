@@ -2,6 +2,10 @@ $header-size: (
   'large': 8px
 );
 
+.v-application--wrap{
+  min-height: 0;
+}
+
 .test{
   display: flex;
   padding-top: 64px;
@@ -72,4 +76,11 @@ $header-size: (
 .main-info_score_intoMark{
   display: flex;
   flex-direction: inherit;
+}
+
+.date-picker_disign{
+  margin-top: 20px;
+}
+.v-navigation-drawer__border{
+  width: 0;
 }
