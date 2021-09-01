@@ -18,7 +18,7 @@ export default {
         type: "get",
         url: `http://api.football-data.org/v2/matches?dateFrom=${state.pickerData}&dateTo=${state.pickerData}`,
         headers: {
-          "X-Auth-Token": "b640fe61f8064cc3b5e928f58d652c8f",
+          "X-Auth-Token": process.env.VUE_APP_API_KEY
         },
       }).then((response) => commit("getDayMatches", response.data.matches));
     },

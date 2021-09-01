@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 <template>
   <v-app>
     <v-navigation-drawer
@@ -25,6 +26,7 @@
       </v-list>
       <v-row justify="center">
         <v-date-picker
+          class="date-picker_disign"
           v-model="picker"
           selected-items-text
           color="green lighten-1"
@@ -34,7 +36,9 @@
     <v-app-bar app color="pink lighten-1" flat class="header">
       <v-toolbar-title
         class="white--text text-md-body-1 text-sm-body-2 text-caption"
-        >Football info</v-toolbar-title
+        >
+        <router-link to="/main">Football info</router-link>
+        </v-toolbar-title
       >
       <v-spacer></v-spacer>
       <v-text-field
@@ -56,12 +60,19 @@
         </div>
       </v-container>
     </v-main>
-    <v-footer app> </v-footer>
+    <v-footer padless>
+    <v-col
+      class="text-center"
+      cols="12"
+    >
+      {{ new Date().getFullYear() }} — <strong>Panteleeva for Simbirsoft</strong>
+    </v-col>
+  </v-footer>
   </v-app>
 </template>
 
 <script>
-import axios from "axios";
+// eslint-disable-next-line no-unused-vars
 import { mapMutations, mapActions } from "vuex";
 
 export default {
@@ -91,24 +102,21 @@ export default {
       return ["xs", "sm"].includes(this.$vuetify.breakpoint.name);
     },
   },
-  mounted() {
-    axios({
-      type: "get",
-      url: "https://api.football-data.org/v2/competitions?areas=2224,2195,2072",
-      headers: {
-        "X-Auth-Token": "b640fe61f8064cc3b5e928f58d652c8f",
-      },
-    }).then((response) => (this.dataFromServer = response.data.competitions));
-
-    // this.getMatches();
-  },
   methods: {
     ...mapActions({
       getMatches: "matches/getMatches",
+      getCompetitions: "competitions/getCompetitions",
+      getTeams: "teams/getTeams",
+      getLigues: "ligues/getLigues",
     }),
     ...mapMutations({
       setPicker: "matches/setPicker",
     }),
+  },
+  mounted() {
+    this.getCompetitions();
+    this.getTeams();
+    this.getLigues();
   },
   watch: {
     picker: {
@@ -117,7 +125,6 @@ export default {
         this.setPicker(this.picker);
         this.getMatches();
       },
-      // this.getMatches();
     },
   },
 };
